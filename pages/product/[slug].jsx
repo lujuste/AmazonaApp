@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import Image from 'next/image'
+import {useRouter} from 'next/router'
 import Layout from '../../components/Layout'
 import NextLink from 'next/link'
 import {Link, Grid, List, ListItem, Typography, Card, Button} from '@material-ui/core'
@@ -10,7 +11,8 @@ import { Store } from '../../utils/Store'
 import axios from 'axios'
 
 export default function ProductScreen(props) {
-    const {dispatch} = useContext(Store)
+    const router = useRouter()
+    const {state, dispatch} = useContext(Store)
    const {product} = props
    const classes = useStyles()
 
@@ -18,15 +20,19 @@ export default function ProductScreen(props) {
        return <div>Product not found</div> 
    }
 
-   const addToCartHandler = async () => {
+   const addToCartHandler = async (product) => {
+    const existItem = state.cart.cartItems.find((x) => x._id === product._id)
+    const quantity = existItem ? existItem.quantity + 1 : 1;
     const { data } = await axios.get(`/api/products/${product._id}`);
-    if(data.countInStock <= 0) {
-        window.alert('Sorry. Product is out of stock')
-        return;
-    }
+    if(data.countInStock < quantity) {
+      window.alert('Sorry. Product is out of stock')
+      return;
+  }
     dispatch({type: 'CART_ADD_ITEM', payload: {
-        ...product, quantity: 1
-    }})    
+        ...product, quantity
+    }})  
+    
+    router.push('/cart')
 }
 
     return (
@@ -81,7 +87,7 @@ export default function ProductScreen(props) {
                             </ListItem>
                             <ListItem>
                                 <Button fullWidth variant="contained" color="primary"
-                                onClick={addToCartHandler}
+                                onClick={() => addToCartHandler(product)}
                                 >
                                     Add to cart!
                                 </Button>
