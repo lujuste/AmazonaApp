@@ -1,39 +1,42 @@
-import {makeStyles} from '@material-ui/core'
+import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles({
-    navBar: {
-        backgroundColor: '#203040',
-        '& a': {
-            color: '#fff',
-            marginLeft: 10,
-        },
+  navBar: {
+    backgroundColor: "#203040",
+    "& a": {
+      color: "#fff",
+      marginLeft: 10,
     },
+  },
 
-    brand: {
-        fontWeight: 'bold',
-        fontSize: '1.5rem',
-    },
-    grow: {
-        flexGrow: 1,
-    },
-    main: {
-        minHeight: '80vh'
-    },
-    footer: {
-        marginTop: 10,
-        textAlign: 'center'
-    },
-    form: { 
-        maxWidth: 800,
-        margin: '0 auto'
-    },
-    navbarButton: {
-        color: '#fff',
-        textTransform: 'initial'
-    },
-    transparentBackground: {
-        backgroundColor: 'transparent'
-    }
-})
+  brand: {
+    fontWeight: "bold",
+    fontSize: "1.5rem",
+  },
+  grow: {
+    flexGrow: 1,
+  },
+  main: {
+    minHeight: "80vh",
+  },
+  footer: {
+    marginTop: 10,
+    textAlign: "center",
+  },
+  form: {
+    maxWidth: 800,
+    margin: "0 auto",
+  },
+  navbarButton: {
+    color: "#fff",
+    textTransform: "initial",
+  },
+  transparentBackground: {
+    backgroundColor: "transparent",
+  },
+  error: {
+    color: "#f04040",
+  },
+});
 
 export default useStyles;
